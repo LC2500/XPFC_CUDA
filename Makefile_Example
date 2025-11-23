@@ -1,0 +1,44 @@
+# Makefile for NCSA Delta HPC
+SERVER ?= NCSA
+
+# NVHPC location
+NVHPC_VERSION= #NVPHC Version 22.11 or CUDA compatability
+NVHPC_DIR= #Change_to_your_NVHPC_directory
+# HPC SDK PATHs
+CUDA_VERSION=11.8 # CUDA Version 11.8 or 12.3
+CUDA_DIR=$(NVHPC_DIR)/cuda/$(CUDA_VERSION)
+# NVCC compiler options:
+CUDACXX=nvcc
+CUDACXXFLAGS= -O3 -gencode arch=compute_80,code=sm_80
+
+CC=g++ 
+CXXFLAGS=-march=native -fopenmp 
+
+HELP_DIR = /u/lwillis/CUDA_tests/cuda-samples/Common 
+
+NCCL_LIB_DIR = #NCCL_version_2.19.3-1_lib
+NCCL_INC_DIR = #NCCL_version_2.19.3-1 include 
+
+# CUDA Library directories:
+CUDA_LIB_DIRS= -L$(CUDA_DIR)/lib64 -L$(NCCL_LIB_DIR)
+# CUDA Include directories:
+CUDA_INC_DIRS= -I$(CUDA_DIR)/include -I$(NCCL_INC_DIR) -I$(HELP_DIR)
+# CUDA Linking libraries:
+CUDA_LINK_LIBS= -lcudart -lcufft -lcufftw -lnccl
+
+SRC = main.cu initialize.cu FFT_freq.cu Avg_calc.cu linspace.cu read_input.cu write_vtk.cu convolve_fields.cu FE_calc.cu euler_step.cu scaling_step.cu power_functions.cu sum_reduction.cu copy_to_cpu.cu permute_matrices.cu copy_matrix.cu sse_calculation.cu
+OBJ = $(SRC:.cu=.o)
+EXEC = run_test
+
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
+	$(CUDACXX) $(CUDACXXFLAGS) -Xcompiler="$(CXXFLAGS)" $(OBJ) -o $@ $(CUDA_LIB_DIRS) $(CUDA_LINK_LIBS)
+
+%.o: %.cu
+	$(CUDACXX) $(CUDACXXFLAGS) -c $< -o $@ $(CUDA_INC_DIRS)
+
+clean:
+	rm -f $(OBJ)
+	rm -f $(EXEC)
+	rm -f LOG*

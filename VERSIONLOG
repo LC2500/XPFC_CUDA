@@ -1,0 +1,13 @@
+04/16/2025 - Start of version LOG, any changes must be added here
+05/03/2025 - Added Makefile for dtai, ensure to load nccl module
+05/03/2025 - Added directory for dtai tests
+05/05/2025 - Added input to deviceReduceKernelFinalCallSSE (sum_reduction.cu) for the 2-D 'volume' scaling for RMSE, reflected in globals and sse_calculation.cu
+05/05/2025 - Changed the output in deviceReduceKernelFinalCallSSE to the RMSE, not the SSE to account for gridsize scaling 
+06/15/2025 - Changed the DCF calculation to max(exp_1,exp_2) in line 195 on initialize.cu 
+07/13/2025 - Changed initialize.cu, line 178, to add psi_0*(1 - i_seed) instead of psi_0 to have perfect average density (psi_0)
+07/13/2025 - TODO: Add feature to helpers_header.cuh to check the time in hours (not needed if end-time is correct) 
+07/13/2025 - TODO: Add feature to main.cu to output .vtk file if run is about to reach walltime (not needed if end-time is correct)
+07/13/2025 - TODO: Add feature to begin simulations using old .vtk file because of short walltimes
+09/19/2025 - Added feature to begin simulations using old .vtk files, select i_config = 10, read_input.cu
+09/20/2025 - Added feature to begin simulations at exactly desired psi_0 to machine precision
+09/29/2025 - Added feature for DCF summation and envelope, uncomment lines in initialize.cu
