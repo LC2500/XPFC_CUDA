@@ -13,6 +13,8 @@ These libraries are proprietary software provided by NVIDIA Corporation under th
 respective End User License Agreements (EULA). This project does not include or
 redistribute any part of those libraries.
 
+Note, a path to helper_functions.h and helper_cuda.h from cuda_samples/Common library should be included. See globals.cuh.
+
 
 ## References
 See https://developer.nvidia.com/blog/faster-parallel-reductions-kepler/ for GPU kernel reduction. The original article was written by Justin Luitjens. Some of the code was modified from the original source, see file: sum_reduction.cu.
