@@ -19,4 +19,4 @@ See https://developer.nvidia.com/blog/faster-parallel-reductions-kepler/ for GPU
 
 
 ## File Creation
-A makefile needs to be adjusted to the user's system.
+A makefile needs to be adjusted to the user's system. Refer to Makefile_Example.
