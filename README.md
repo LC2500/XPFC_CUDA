@@ -3,7 +3,6 @@ The following CUDA/C++ program is a GPU accelerated code based on the structural
 
 
 ## Requirements
-
 This program requires the NVIDIA CUDA Toolkit (or CUDA HPC SDK) to compile and run.
 It can be downloaded from the official NVIDIA website:
 
@@ -13,3 +12,11 @@ It can be downloaded from the official NVIDIA website:
 These libraries are proprietary software provided by NVIDIA Corporation under their
 respective End User License Agreements (EULA). This project does not include or
 redistribute any part of those libraries.
+
+
+## References
+See https://developer.nvidia.com/blog/faster-parallel-reductions-kepler/ for GPU kernel reduction. The original article was written by Justin Luitjens. Some of the code was modified from the original source, see file: sum_reduction.cu.
+
+
+## File Creation
+A makefile needs to be adjusted to the user's system.
